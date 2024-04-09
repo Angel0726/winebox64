@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN useradd -m -d /home/container container
 ENV USER=container HOME=/home/container
 
-## install dependencies
+## install dependencies  xvfb、xauth、wget与novnc的docker重复
 RUN apt update && apt upgrade -y
 RUN apt install -y iproute2 gnupg2 tzdata software-properties-common libntlm0 winbind xvfb xauth python3 wget ca-certificates locales apt-transport-https
 
@@ -25,7 +25,7 @@ RUN apt update
 ## install dependencies and box64 itself
 RUN apt install -y libc6 libstdc++6 mesa* zenity* box64
 
-## install box86
+## install box86   libasound2、libxext6与novnc的docker重复
 RUN dpkg --add-architecture armhf
 RUN wget https://ryanfortner.github.io/box86-debs/box86.list -O /etc/apt/sources.list.d/box64.list
 RUN wget -O- https://ryanfortner.github.io/box86-debs/KEY.gpg | gpg --dearmor |  tee /usr/share/keyrings/box86-debs-archive-keyring.gpg
